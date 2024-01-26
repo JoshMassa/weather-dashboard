@@ -2,6 +2,7 @@ var APIKey = '42dcd1bbf1fe246bc2b08d6f894edf83';
 var city;
 var getWeatherBtn = document.getElementById('get-weather');
 var weatherResult = document.getElementById('weather');
+var weatherCard = document.getElementById('weather-card');
 
 //Event listener to fetch user's location and dynamically update that location's 5-day weather forecast to the page upon loading
 document.addEventListener('DOMContentLoaded', function () {
@@ -100,25 +101,76 @@ getWeatherBtn.addEventListener('click', function getWeather() {
         });
 });
 
+
+
+
+
 function displayCurrentWeather(currentWeather) {
-    // Assuming 'weatherResult' is the HTML element where you want to display the current weather
-    var weatherResult = document.getElementById('weather');
-
-    // Clear any existing content
-    weatherResult.textContent = '';
-
     // Extract relevant information from the API response
-    var temperature = currentWeather.main.temp;
-    var description = currentWeather.weather[0].description;
+    var date = new Date();
+    var temperatureKelvin = currentWeather.main.temp;
+    var temperatureFahrenheit = parseInt((temperatureKelvin - 273.15) * 9/5 + 32);
+    var humidity = currentWeather.main.humidity;
+    var cloudCover = currentWeather.clouds.all;
+    var chanceOfRain = currentWeather.rain ? currentWeather.rain['1h'] : 0; // Check if rain data is available
+    var iconCode = currentWeather.weather[0].icon;
+    var windSpeed = currentWeather.wind.speed;
+    var windSpeedMPH = parseFloat((windSpeed * 2.237).toFixed(1));
 
-    // Create HTML elements to display the information
-    var temperatureParagraph = document.createElement('p');
-    temperatureParagraph.textContent = 'Current Temperature: ' + temperature + ' °C';
+    // Update HTML elements in the weather card
+    document.getElementById('date').textContent = 'Date: ' + date.toDateString();
+    document.getElementById('temperature').textContent = 'Temperature: ' + temperatureFahrenheit + ' °F';
+    document.getElementById('humidity').textContent = 'Humidity: ' + humidity + '%';
+    document.getElementById('cloud-cover').textContent = 'Cloud Cover: ' + cloudCover + '%';
+    document.getElementById('chance-of-rain').textContent = 'Chance of Rain: ' + chanceOfRain + ' mm';
+    document.getElementById('wind-speed').textContent = 'Wind Speed: ' + windSpeedMPH + " mph"
 
-    var descriptionParagraph = document.createElement('p');
-    descriptionParagraph.textContent = 'Description: ' + description;
+    // Update weather icon
+    var weatherIcon = document.getElementById('weather-icon');
+    weatherIcon.src = 'http://openweathermap.org/img/wn/' + iconCode + '.png';
+    //Update Wind Direction Icon
+    var windDirectionIcon = document.getElementById('wind-direction-icon');
+    var windDirectionDegrees = currentWeather.wind.deg;
+    windDirectionIcon.style.transform = 'rotate(' + windDirectionDegrees + 'deg)';
 
-    // Append the created elements to the weatherResult container
-    weatherResult.appendChild(temperatureParagraph);
-    weatherResult.appendChild(descriptionParagraph);
+    // Display the weather card
+    weatherCard.style.display = 'block';
 }
+
+
+
+
+
+
+
+function getLocationAndUpdateTitle() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            // Get the user's coordinates
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+
+            // Fetch the town name using a reverse geocoding API
+            fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${APIKey}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Extract the town name from the API response
+                    var townName = data.name;
+
+                    // Update the title with the town name
+                    var yourLocalWeather = document.getElementById('your-local-weather');
+                    yourLocalWeather.textContent = `Current Weather for ${townName}`;
+                })
+                .catch(error => {
+                    console.error('Error fetching weather data:', error);
+                });
+        });
+    } else {
+        alert('Geolocation is not supported by your browser');
+    }
+}
+
+// Call the function to update the title when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    getLocationAndUpdateTitle();
+});

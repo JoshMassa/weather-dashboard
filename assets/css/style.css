@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#weather-card {
+    border: 1px solid black;
+}
+
+a {
+    color: white;
+}
+
+.wind-info p {
+    display: inline-block;
+}
