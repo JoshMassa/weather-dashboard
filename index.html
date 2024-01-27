@@ -21,20 +21,35 @@
     </header>
     
         <div class="row">
-            <div class="col-lg-2" id="weather"></div>
+            <div class="col-lg-2" id="major-cities">
+                <button>Chicago</button>
+                <button>Houston</button>
+                <button>Boston</button>
+                <button>New York City</button>
+                <button>Memphis</button>
+                <button>San Diego</button>
+                <button>Portland</button>
+                <button>Bangor</button>
+                <button>Miami</button>
+                <button>Philadelphia</button>
+            </div>
             <div class="col-lg-6" id="weather-card">
                 <h2 id="date"></h2>
                 <img id="weather-icon" src="" alt="Weather Icon">
                 <p id="temperature"></p>
                 <p id="humidity"></p>
                 <p id="cloud-cover"></p>
-                <p id="chance-of-rain"></p>
                 <div class="wind-info">
                     <p id="wind-speed"></p>
                     <i id="wind-direction-icon" class="fas fa-arrow-up"></i>
                 </div>    
             </div>
             <div class="col-lg-4" id='myMap'></div>
+        </div>
+
+        <div class="row" id="five-day-container">
+            <h3>5-Day Forecast</h3>
+        <div class="col-lg-7" id="weather"></div>
         </div>
 
     <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=AkCHy9OBVHzV0M7YyJzkuv_jQk7VEYpzriKp34nW3yNPxWWSDbMbpI-CNc6dh0uV&callback=loadMapScenario' async defer></script>

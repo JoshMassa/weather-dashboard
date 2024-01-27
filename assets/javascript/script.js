@@ -51,7 +51,7 @@ function getLocationAndFetchWeather() {
     }
 }
 
-function displayForecast(dailyForecast, location) {
+function displayForecast(dailyForecast) {
     // Clear any existing weather content
     weatherResult.textContent = '';
     // Keep track of dates already displayed
@@ -66,40 +66,44 @@ function displayForecast(dailyForecast, location) {
             continue;
         }
 
-        // Mark the date as displayed
+        //Mark the date as displayed
         displayedDates.add(dateKey);
 
         var temperature = dailyForecast[i].main.temp;
         var temperatureFahrenheit = parseInt((temperature - 273.15) * 9/5 + 32);
 
-        // Check if array exists before trying to access it
+        //Check if array exists before trying to access it
         var description = dailyForecast[i].weather && Array.isArray(dailyForecast[i].weather) && dailyForecast[i].weather.length > 0
             ? dailyForecast[i].weather[0].description
             : 'Description not available';
 
-        // Create a forecast div container
+        //Create a forecast div container
         var forecastDiv = document.createElement('div');
         forecastDiv.classList.add('five-day-forecast')
-        
-        // Create a p element to hold the user's location
-        var locationParagraph = document.createElement('p');
-        locationParagraph.textContent = 'Location: ' + location;
-        forecastDiv.appendChild(locationParagraph);
 
-        // Create a p element to hold the date
+        //Create a p element to hold the date
         var dateParagraph = document.createElement('p');
-        dateParagraph.textContent = 'Date: ' + forecastDate.toDateString();
+        var options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+        dateParagraph.textContent = forecastDate.toLocaleDateString('en-US', options);
         forecastDiv.appendChild(dateParagraph);
 
-        // Create a p element to hold the current temperature
+        //Create a p element to hold the temperature
         var temperatureParagraph = document.createElement('p');
         temperatureParagraph.textContent = 'Temperature: ' + temperatureFahrenheit + ' °F';
         forecastDiv.appendChild(temperatureParagraph);
 
-        // Create a p element to hold weather description
-        var descriptionParagraph = document.createElement('p');
-        descriptionParagraph.textContent = 'Description: ' + description;
-        forecastDiv.appendChild(descriptionParagraph);
+        //Create a p element to hold the humidity
+        var humidityParagraph = document.createElement('p');
+        var humidity = dailyForecast[i].main.humidity;
+        humidityParagraph.textContent = 'Humidity: ' + humidity + '%';
+        forecastDiv.appendChild(humidityParagraph);
+
+        //Create a p element to hold the wind speed
+        var windParagraph = document.createElement('p');
+        var windSpeed = dailyForecast[i].wind.speed;
+        var windSpeedMPH = parseFloat((windSpeed * 2.237).toFixed(1));
+        windParagraph.textContent = 'Wind Speed: ' + windSpeedMPH + 'mph';
+        forecastDiv.appendChild(windParagraph);
 
         // Append weather result to the page
         weatherResult.appendChild(forecastDiv);
@@ -137,7 +141,6 @@ function displayCurrentWeather(currentWeather) {
     var temperatureFahrenheit = parseInt((temperatureKelvin - 273.15) * 9/5 + 32);
     var humidity = currentWeather.main.humidity;
     var cloudCover = currentWeather.clouds.all;
-    var chanceOfRain = currentWeather.rain ? currentWeather.rain['1h'] : 0; // Check if rain data is available
     var iconCode = currentWeather.weather[0].icon;
     var windSpeed = currentWeather.wind.speed;
     var windSpeedMPH = parseFloat((windSpeed * 2.237).toFixed(1));
@@ -147,7 +150,6 @@ function displayCurrentWeather(currentWeather) {
     document.getElementById('temperature').textContent = 'Temperature: ' + temperatureFahrenheit + ' °F';
     document.getElementById('humidity').textContent = 'Humidity: ' + humidity + '%';
     document.getElementById('cloud-cover').textContent = 'Cloud Cover: ' + cloudCover + '%';
-    document.getElementById('chance-of-rain').textContent = 'Chance of Rain: ' + chanceOfRain + ' mm';
     document.getElementById('wind-speed').textContent = 'Wind Speed: ' + windSpeedMPH + " mph"
 
     // Update weather icon
@@ -171,28 +173,39 @@ function displayCurrentWeather(currentWeather) {
 function getLocationAndUpdateTitle() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-            // Get the user's coordinates
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
 
-            // Fetch the town name using a reverse geocoding API
-            fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${APIKey}`)
+            var currentWeatherURL = 'https://api.openweathermap.org/data/2.5/weather?lat=' + latitude + '&lon=' + longitude + '&appid=' + APIKey;
+
+            // Fetch current weather data
+            fetch(currentWeatherURL)
                 .then(response => response.json())
-                .then(data => {
-                    // Extract the town name from the API response
-                    var townName = data.name;
+                .then(currentWeather => {
+                    var townName = currentWeather.name;
 
                     // Update the title with the town name
                     var yourLocalWeather = document.getElementById('your-local-weather');
                     yourLocalWeather.textContent = `Current Weather for ${townName}`;
 
-                    var location = document.getElementById('')`${townName}`;
-                    displayForecast(dailyForecast, location);
+                    // Fetch forecast data
+                    var forecastURL = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + latitude + '&lon=' + longitude + '&appid=' + APIKey;
+
+                    fetch(forecastURL)
+                        .then(response => response.json())
+                        .then(forecastData => {
+                            console.log(forecastData);
+                            // Display the 5-day forecast
+                            displayForecast(forecastData.list, townName, currentWeather);
+                        })
+                        .catch(error => {
+                            console.error('Error fetching forecast data:', error);
+                        });
                 })
                 .catch(error => {
-                    console.error('Error fetching weather data:', error);
-                })
-        })
+                    console.error('Error fetching current weather data:', error);
+                });
+        });
     } else {
         alert('Geolocation is not supported by your browser');
     }
