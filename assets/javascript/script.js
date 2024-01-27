@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     getLocationAndFetchWeather();
 });
 
-//Function to get the user's location and that location's weather
+//Function to get the user's location and that location's weather and update it to the weather card
 function getLocationAndFetchWeather() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -51,6 +51,7 @@ function getLocationAndFetchWeather() {
     }
 }
 
+//Function to display the 5-day forecast
 function displayForecast(dailyForecast) {
     // Clear any existing weather content
     weatherResult.textContent = '';
@@ -86,6 +87,13 @@ function displayForecast(dailyForecast) {
         var options = { year: 'numeric', month: '2-digit', day: '2-digit' };
         dateParagraph.textContent = forecastDate.toLocaleDateString('en-US', options);
         forecastDiv.appendChild(dateParagraph);
+
+        // Create an img element for the weather icon
+        var weatherIcon = document.createElement('img');
+        weatherIcon.classList.add('five-day-icon')
+        weatherIcon.src = 'http://openweathermap.org/img/wn/' + dailyForecast[i].weather[0].icon + '.png';
+        weatherIcon.alt = 'Weather Icon';
+        forecastDiv.appendChild(weatherIcon);
 
         //Create a p element to hold the temperature
         var temperatureParagraph = document.createElement('p');

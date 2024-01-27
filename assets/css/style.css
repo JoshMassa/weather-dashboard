@@ -123,3 +123,8 @@ input {
 #major-cities button:first-child {
     margin-top: 20px;
 }
+
+.five-day-icon {
+    background-color: rgba(114, 114, 114, 0.733);
+    border-radius: 30px;
+}
