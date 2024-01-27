@@ -146,7 +146,7 @@ function displayCurrentWeather(currentWeather) {
     var windSpeedMPH = parseFloat((windSpeed * 2.237).toFixed(1));
 
     // Update HTML elements in the weather card
-    document.getElementById('date').textContent = 'Date: ' + date.toDateString();
+    document.getElementById('date').textContent = date.toDateString();
     document.getElementById('temperature').textContent = 'Temperature: ' + temperatureFahrenheit + ' °F';
     document.getElementById('humidity').textContent = 'Humidity: ' + humidity + '%';
     document.getElementById('cloud-cover').textContent = 'Cloud Cover: ' + cloudCover + '%';
