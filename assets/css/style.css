@@ -62,3 +62,14 @@ form {
     height: 75vh;
     margin-top: 20px;
 }
+
+.five-day-forecast {
+    border: 1px solid black;
+    background-color: rgb(140, 140, 140, 0.3);
+    margin-top: 5px;
+    text-align: center;
+}
+
+.five-day-forecast:first-child {
+    margin-top: 20px;
+}

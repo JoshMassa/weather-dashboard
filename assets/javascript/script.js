@@ -3,6 +3,7 @@ var city;
 var getWeatherBtn = document.getElementById('get-weather');
 var weatherResult = document.getElementById('weather');
 var weatherCard = document.getElementById('weather-card');
+var dailyForecast = [];
 
 //Event listener to fetch user's location and dynamically update that location's 5-day weather forecast to the page upon loading
 document.addEventListener('DOMContentLoaded', function () {
@@ -50,37 +51,61 @@ function getLocationAndFetchWeather() {
     }
 }
 
-function displayForecast(dailyForecast) {
-    //Clear any existing weather content
+function displayForecast(dailyForecast, location) {
+    // Clear any existing weather content
     weatherResult.textContent = '';
-    //Iterate through the forecast to only show 5 days
-    for (let i = 0; i < 5 && i < dailyForecast.length; i++) {
-        var forecastDate = new Date(dailyForecast[i].dt * 1000)
-        var temperature = dailyForecast[i].temp;
-        
-        //Check if array exists before trying to access it
-        var description = dailyForecast[i].weather && Array.isArray(dailyForecast[i].weather) && dailyForecast[i].weather.length > 0 
-        ? dailyForecast[i].weather[0].description 
-        : 'Description not available';
-        
-        //Create a forecast div container
+    // Keep track of dates already displayed
+    var displayedDates = new Set();
+    // Iterate through the forecast to only show 5 unique days
+    for (let i = 0; i < dailyForecast.length && displayedDates.size < 5; i++) {
+        var forecastDate = new Date(dailyForecast[i].dt * 1000);
+        var dateKey = `${forecastDate.getFullYear()}-${forecastDate.getMonth() + 1}-${forecastDate.getDate()}`;
+
+        // Skip duplicate dates
+        if (displayedDates.has(dateKey)) {
+            continue;
+        }
+
+        // Mark the date as displayed
+        displayedDates.add(dateKey);
+
+        var temperature = dailyForecast[i].main.temp;
+        var temperatureFahrenheit = parseInt((temperature - 273.15) * 9/5 + 32);
+
+        // Check if array exists before trying to access it
+        var description = dailyForecast[i].weather && Array.isArray(dailyForecast[i].weather) && dailyForecast[i].weather.length > 0
+            ? dailyForecast[i].weather[0].description
+            : 'Description not available';
+
+        // Create a forecast div container
         var forecastDiv = document.createElement('div');
-        //Create a p element to hold the date
+        forecastDiv.classList.add('five-day-forecast')
+        
+        // Create a p element to hold the user's location
+        var locationParagraph = document.createElement('p');
+        locationParagraph.textContent = 'Location: ' + location;
+        forecastDiv.appendChild(locationParagraph);
+
+        // Create a p element to hold the date
         var dateParagraph = document.createElement('p');
         dateParagraph.textContent = 'Date: ' + forecastDate.toDateString();
         forecastDiv.appendChild(dateParagraph);
-        //Create a p element to hold the current temperature
+
+        // Create a p element to hold the current temperature
         var temperatureParagraph = document.createElement('p');
-        temperatureParagraph.textContent = 'Temperature: ' + temperature + ' °C';
+        temperatureParagraph.textContent = 'Temperature: ' + temperatureFahrenheit + ' °F';
         forecastDiv.appendChild(temperatureParagraph);
-        //Create a p element to hold weather description
+
+        // Create a p element to hold weather description
         var descriptionParagraph = document.createElement('p');
         descriptionParagraph.textContent = 'Description: ' + description;
         forecastDiv.appendChild(descriptionParagraph);
-        //Append weather result to the page
+
+        // Append weather result to the page
         weatherResult.appendChild(forecastDiv);
     }
 }
+
 
 getWeatherBtn.addEventListener('click', function getWeather() {
     //Get the user's input
@@ -160,11 +185,14 @@ function getLocationAndUpdateTitle() {
                     // Update the title with the town name
                     var yourLocalWeather = document.getElementById('your-local-weather');
                     yourLocalWeather.textContent = `Current Weather for ${townName}`;
+
+                    var location = document.getElementById('')`${townName}`;
+                    displayForecast(dailyForecast, location);
                 })
                 .catch(error => {
                     console.error('Error fetching weather data:', error);
-                });
-        });
+                })
+        })
     } else {
         alert('Geolocation is not supported by your browser');
     }
