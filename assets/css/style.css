@@ -6,6 +6,16 @@
 
 #weather-card {
     border: 1px solid black;
+    margin: 20px;
+    max-height: 325px;
+    max-width: 45%;
+    background-image: url(../images/weather-card-background.avif);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: rgb(255, 255, 255);
+    font-weight: 900;
+    text-shadow: 2px 2px 2px black;
 }
 
 a {
@@ -14,4 +24,41 @@ a {
 
 .wind-info p {
     display: inline-block;
+}
+
+.navbar-brand {
+    color: white;
+}
+
+
+.row {
+    margin: 0;
+}
+
+.container-fluid {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#your-local-weather {
+    margin: 0 auto;
+}
+
+form {
+    margin-top: 7px;
+}
+
+#get-weather {
+    width: 125px;
+}
+
+.bg-primary {
+    height: 75px;
+}
+
+#myMap {
+    width: 35vw;
+    height: 75vh;
+    margin-top: 20px;
 }
