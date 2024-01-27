@@ -53,6 +53,10 @@ function getLocationAndFetchWeather() {
 
 //Function to display the 5-day forecast
 function displayForecast(dailyForecast) {
+    if (!Array.isArray(dailyForecast)) {
+        console.error('dailyForecast is not an array:', dailyForecast);
+        return;
+    }
     // Clear any existing weather content
     weatherResult.textContent = '';
     // Keep track of dates already displayed
@@ -120,22 +124,52 @@ function displayForecast(dailyForecast) {
 
 
 getWeatherBtn.addEventListener('click', function getWeather() {
+    //Prevent default submission behavior
+    event.preventDefault();
     //Get the user's input
     var userInput = document.getElementById('cityInput').value;
     //Reassign city variable
-    city = userInput
+    city = userInput;
+    var encodedCity = encodeURIComponent(city);
     //Store API URL in a variable
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
-    //Make the API call
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + encodedCity + "&appid=" + APIKey;
+    //Make the API call to update weather card
     fetch(queryURL)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
-            weatherResult.textContent = "Temperature: " + data.main.temp + "°C";
+            console.log('API Response', data);
+            displayCurrentWeather(data);
         })
         .catch(error => {
             console.error('Error fetching weather data:', error);
         });
+
+    //Grab 5-day forecast API
+    var forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + encodedCity + "&appid=" + APIKey;
+    //Make the API call to update the 5-day forecast
+    fetch(forecastQueryURL)
+        .then(response => response.json())
+        .then(data => {
+            displayForecast(data.list);
+    })
+    .catch(error => {
+        console.error('Error fetching forecast data:', error);
+    });
+    //Update map with user's entered location
+    fetch(queryURL)
+        .then(response => response.json())
+        .then(data => {
+            // Get the coordinates of the entered city to update the map
+            var cityLocation = new Microsoft.Maps.Location(data.coord.lat, data.coord.lon);
+
+            // Call the map function with the updated city location
+            loadMapScenario(cityLocation);
+        })
+        .catch(error => {
+            console.error('Error fetching weather data:', error);
+        });
+    console.log('User input: ', userInput);
+    console.log ('API URL: ', queryURL);
 });
 
 
