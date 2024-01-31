@@ -184,7 +184,7 @@ function loadMapScenario() {
     console.log('Map', map);
 	//Set the map center default to the user's location
 	var location = new Microsoft.Maps.Location(latitude, longitude);
-	map.setView({ center: location, zoom: 9 });
+	map.setView({ center: location, zoom: 10 });
 
 	//Update the map with a rain overlay
 	var urlTemplate =
