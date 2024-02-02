@@ -1,16 +1,16 @@
 var APIKey = '42dcd1bbf1fe246bc2b08d6f894edf83';
-var city;
 var getWeatherBtn = document.getElementById('get-weather');
 var weatherResult = document.getElementById('weather');
 var weatherCard = document.getElementById('weather-card');
 var dailyForecast = [];
 var latitude = 39.1887643719098;
 var longitude = -92.8261546188403;
-var navigatorCounter = 0;
+var historyContainer = document.getElementById('search-history-container');
 
 //Event listener to fetch user's location and dynamically update that location's 5-day weather forecast to the page upon loading
 document.addEventListener('DOMContentLoaded', function () {
 	getLocationAndUpdateTitle();
+	retrieveLocalStorage();
 });
 
 //Function to display the 5-day forecast
@@ -96,14 +96,17 @@ function displayForecast(dailyForecast) {
 	}
 }
 
-getWeatherBtn.addEventListener('click', function getWeather() {
-	//Prevent default submission behavior
-	event.preventDefault();
-	//Get the user's input
-	var userInput = document.getElementById('cityInput').value;
-	//Reassign city variable
-	city = userInput;
-	var encodedCity = encodeURIComponent(city);
+getWeatherBtn.addEventListener('click', function(){
+		//Prevent default submission behavior
+		event.preventDefault();
+		//Get the user's input
+		var userInput = document.getElementById('cityInput').value;
+		getWeather(userInput);
+});
+
+function getWeather(cityName) {
+	console.log('cityname', cityName)
+	var encodedCity = encodeURIComponent(cityName);
 	//Store API URL in a variable
 	var queryURL =
 		'http://api.openweathermap.org/geo/1.0/direct?q=' +
@@ -120,11 +123,12 @@ getWeatherBtn.addEventListener('click', function getWeather() {
 			longitude = data[0].lon;
 			getCurrentWeather();
 			loadMapScenario();
+			saveToLocalStorage(cityName);
 		})
 		.catch((error) => {
 			console.error('Error fetching weather data:', error);
 		});
-});
+};
 
 function displayCurrentWeather(currentWeather) {
 	// Extract relevant information from the API response
@@ -265,3 +269,42 @@ function getForecastWeather() {
 }
 
 
+
+
+
+
+
+historyContainer.addEventListener('click', function() {
+	if (event.target.matches('button')) {
+		console.log('*******************', event.target.textContent)
+		var cityName = event.target.textContent;
+		getWeather(cityName);
+	}
+});
+
+function retrieveLocalStorage() {
+	var searchHistory = localStorage.getItem('history')
+		if (searchHistory) {
+			searchHistory = JSON.parse(searchHistory)
+			displayParsedHistory(searchHistory)
+		}
+};
+
+function displayParsedHistory(searchHistory) {
+	historyContainer.innerHTML = '';
+	for (var i = 0; i < searchHistory.length; i++) {
+		var buttonEl = document.createElement('button');
+		buttonEl.textContent = searchHistory[i];
+		historyContainer.appendChild(buttonEl);
+	}
+}
+
+function saveToLocalStorage(cityName) {
+	var searchHistory = JSON.parse(localStorage.getItem('history')) || [];
+		if (searchHistory.includes(cityName)) {
+			return;
+		}
+		searchHistory.push(cityName)
+		localStorage.setItem('history', JSON.stringify(searchHistory))
+		displayParsedHistory(searchHistory);
+}
