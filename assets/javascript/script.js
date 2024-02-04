@@ -291,12 +291,12 @@ function retrieveLocalStorage() {
 
 //Create and append a button for a uniquely searched city
 function displayParsedHistory(searchHistory) {
-	historyContainer.innerHTML = '';
+	historyContainer.textContent = '';
 	for (var i = 0; i < searchHistory.length; i++) {
 		var buttonEl = document.createElement('button');
 		buttonEl.textContent = searchHistory[i];
 		historyContainer.appendChild(buttonEl);
-	}
+	} 
 }
 
 //Save search history to local storage

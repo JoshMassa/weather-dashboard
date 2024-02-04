@@ -4,8 +4,10 @@
     box-sizing: border-box;
 }
 
+html,
 body {
     background-color: rgb(202, 202, 202);
+    height: 1000px;
 }
 
 #weather-card {
@@ -132,6 +134,12 @@ input {
     background-color: rgba(114, 114, 114, 0.733);
     border-radius: 30px;
 }
+
+
+
+
+
+
 
 @media screen and (min-width: 2201px) and (max-width: 2455px) {
     form {
