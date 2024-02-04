@@ -66,7 +66,7 @@ function displayForecast(dailyForecast) {
 		var weatherIcon = document.createElement('img');
 		weatherIcon.classList.add('five-day-icon');
 		weatherIcon.src =
-			'http://openweathermap.org/img/wn/' +
+			'https://openweathermap.org/img/wn/' +
 			dailyForecast[i].weather[0].icon +
 			'.png';
 		weatherIcon.alt = 'Weather Icon';
@@ -111,7 +111,7 @@ function getWeather(cityName) {
 	var encodedCity = encodeURIComponent(cityName);
 	//Store API URL in a variable
 	var queryURL =
-		'http://api.openweathermap.org/geo/1.0/direct?q=' +
+		'https://api.openweathermap.org/geo/1.0/direct?q=' +
 		encodedCity +
 		'&limit=5' +
 		'&appid=' +
@@ -158,7 +158,7 @@ function displayCurrentWeather(currentWeather) {
 
 	// Update weather icon
 	var weatherIcon = document.getElementById('weather-icon');
-	weatherIcon.src = 'http://openweathermap.org/img/wn/' + iconCode + '.png';
+	weatherIcon.src = 'https://openweathermap.org/img/wn/' + iconCode + '.png';
 	//Update Wind Direction Icon
 	var windDirectionIcon = document.getElementById('wind-direction-icon');
 	var windDirectionDegrees = currentWeather.wind.deg;
