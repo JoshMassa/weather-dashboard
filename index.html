@@ -15,7 +15,7 @@
         </nav>
     </header>
     
-        <div class="row">
+        <div class="row" id="main-container">
             <div class="col-lg-2" id="major-cities">
                 <form id='weather-search' role="search">
                     <label for="cityInput"></label>
@@ -36,11 +36,10 @@
                 </div>    
             </div>
             <div class="col-lg-4" id='myMap'></div>
-        </div>
-
-        <div class="row" id="five-day-container">
-            <h3>5-Day Forecast</h3>
-        <div class="col-lg-7" id="weather"></div>
+            <div id="five-day-container">
+                <h3>5-Day Forecast</h3>
+            <div id="weather"></div>
+            </div>
         </div>
 
     <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=AkCHy9OBVHzV0M7YyJzkuv_jQk7VEYpzriKp34nW3yNPxWWSDbMbpI-CNc6dh0uV&callback=loadMapScenario' async defer></script>

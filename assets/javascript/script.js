@@ -75,7 +75,8 @@ function displayForecast(dailyForecast) {
 		//Create a p element to hold the temperature
 		var temperatureParagraph = document.createElement('p');
 		temperatureParagraph.textContent =
-			'Temperature: ' + temperatureFahrenheit + ' °F';
+			'Temp : ' + temperatureFahrenheit + ' °F';
+		temperatureParagraph.style.display = 'inline-block';
 		forecastDiv.appendChild(temperatureParagraph);
 
 		//Create a p element to hold the humidity
@@ -96,6 +97,7 @@ function displayForecast(dailyForecast) {
 	}
 }
 
+//Event listener for the getWeather button
 getWeatherBtn.addEventListener('click', function(){
 		//Prevent default submission behavior
 		event.preventDefault();
@@ -104,8 +106,8 @@ getWeatherBtn.addEventListener('click', function(){
 		getWeather(userInput);
 });
 
+//Function to search for weather in a specific city
 function getWeather(cityName) {
-	console.log('cityname', cityName)
 	var encodedCity = encodeURIComponent(cityName);
 	//Store API URL in a variable
 	var queryURL =
@@ -118,7 +120,6 @@ function getWeather(cityName) {
 	fetch(queryURL)
 		.then((response) => response.json())
 		.then((data) => {
-			console.log('geoAPI Response', data);
 			latitude = data[0].lat;
 			longitude = data[0].lon;
 			getCurrentWeather();
@@ -130,6 +131,7 @@ function getWeather(cityName) {
 		});
 };
 
+//Function to display current weather on the weather card
 function displayCurrentWeather(currentWeather) {
 	// Extract relevant information from the API response
 	var date = new Date();
@@ -166,6 +168,7 @@ function displayCurrentWeather(currentWeather) {
 	weatherCard.style.display = 'block';
 }
 
+//Function to dynamically display town name in the header based on the location searched
 function getLocationAndUpdateTitle() {
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function (position) {
@@ -179,16 +182,16 @@ function getLocationAndUpdateTitle() {
 	}
 }
 
+//Function to set the radar map center to the users location and display the map with a rain overlay
 function loadMapScenario() {
 	var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
 		/* No need to set credentials if already passed in URL */
 		center: new Microsoft.Maps.Location(latitude, longitude),
 		zoom: 4,
 	});
-    console.log('Map', map);
 	//Set the map center default to the user's location
 	var location = new Microsoft.Maps.Location(latitude, longitude);
-	map.setView({ center: location, zoom: 10 });
+	map.setView({ center: location, zoom: 8 });
 
 	//Update the map with a rain overlay
 	var urlTemplate =
@@ -220,6 +223,7 @@ function loadMapScenario() {
 	map.layers.insert(animatedLayer);
 }
 
+//Function to fetch current weather and update the forecast display
 function getCurrentWeather() {
 	var currentWeatherURL =
 		'https://api.openweathermap.org/data/2.5/weather?lat=' +
@@ -232,9 +236,7 @@ function getCurrentWeather() {
 	fetch(currentWeatherURL)
 		.then((response) => response.json())
 		.then((currentWeather) => {
-			console.log('currentWeather', currentWeather);
 			var townName = currentWeather.name;
-			console.log('townName', townName);
 			// Update the title with the town name
 			var yourLocalWeather = document.getElementById('your-local-weather');
 			yourLocalWeather.textContent = `Current Weather for ${townName}`;
@@ -246,6 +248,7 @@ function getCurrentWeather() {
 		});
 }
 
+//Function to fetch and display the 5 day forecast data
 function getForecastWeather() {
 	// Fetch forecast data
 	var forecastURL =
@@ -256,10 +259,10 @@ function getForecastWeather() {
 		'&appid=' +
 		APIKey;
 
+
 	fetch(forecastURL)
 		.then((response) => response.json())
 		.then((forecastData) => {
-			console.log(forecastData);
 			// Display the 5-day forecast
 			displayForecast(forecastData.list);
 		})
@@ -268,20 +271,15 @@ function getForecastWeather() {
 		});
 }
 
-
-
-
-
-
-
+//If the clicked element is a button, retrieve the text content
 historyContainer.addEventListener('click', function() {
 	if (event.target.matches('button')) {
-		console.log('*******************', event.target.textContent)
 		var cityName = event.target.textContent;
 		getWeather(cityName);
 	}
 });
 
+//Retrieve search history from local storage and parse it into a JS object
 function retrieveLocalStorage() {
 	var searchHistory = localStorage.getItem('history')
 		if (searchHistory) {
@@ -290,6 +288,8 @@ function retrieveLocalStorage() {
 		}
 };
 
+
+//Create and append a button for a uniquely searched city
 function displayParsedHistory(searchHistory) {
 	historyContainer.innerHTML = '';
 	for (var i = 0; i < searchHistory.length; i++) {
@@ -299,6 +299,7 @@ function displayParsedHistory(searchHistory) {
 	}
 }
 
+//Save search history to local storage
 function saveToLocalStorage(cityName) {
 	var searchHistory = JSON.parse(localStorage.getItem('history')) || [];
 		if (searchHistory.includes(cityName)) {

@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: rgb(202, 202, 202);
+}
+
 #weather-card {
     border: 1px solid black;
     margin: 20px;
@@ -48,11 +52,11 @@ a {
     font-size: 30px;
     font-weight: 900;
     text-shadow: 2px 2px 9px black;
-    margin-left: 20rem;
+    margin-left: 28rem;
 }
 
 form {
-    margin-top: 7px;
+    margin-top: 2vh;
     border-bottom: 1px solid black;
 }
 
@@ -78,8 +82,8 @@ input {
 }
 
 #myMap {
-    width: 35vw;
-    height: 75vh;
+    width: 800px;
+    max-height: 800px;
     margin-top: 20px;
 }
 
@@ -94,7 +98,7 @@ input {
 
 #weather-icon {
     margin: 20px 0 0 40px;
-    background-color: rgb(0 0 0 / 50%);
+    background-color: rgba(220, 220, 220, 0.5);
     border-radius: 30px;
 }
 
@@ -103,8 +107,8 @@ input {
 }
 
 #five-day-container {
-    margin-left: 17%;
-    margin-top: -25rem;
+    margin-left: 23%;
+    margin-top: -13%;
     max-width: 45%;
 }
 
@@ -127,4 +131,80 @@ input {
 .five-day-icon {
     background-color: rgba(114, 114, 114, 0.733);
     border-radius: 30px;
+}
+
+@media screen and (min-width: 2201px) and (max-width: 2455px) {
+    form {
+        margin-top: -3px;
+    }
+}
+
+@media screen and (min-width: 1850px) and (max-width: 2200px) {
+    #five-day-container {
+        margin-left: 17vw;
+        margin-top: -37vh;
+        max-width: 40rem;
+    }
+
+    #myMap {
+        width: 600px;
+        max-height: 600px;
+        margin-top: 20px;
+    }
+
+    form {
+        margin-top: -3px;
+    }
+}
+
+@media screen and (min-width: 1440px) and (max-width: 1849px) {
+    #five-day-container {
+        margin-left: 17vw;
+        margin-top: -37vh;
+        max-width: 45%;
+    }
+
+    .five-day-forecast {
+        max-width: 19%;
+    }
+
+    #myMap {
+        width: 450px;
+        max-height: 600px;
+        margin-top: 20px;
+        margin-left: 10px;
+    }
+
+    form {
+        margin-top: -3px;
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
+    #five-day-container {
+        margin-left: -13vw;
+        margin-top: -40vh;
+        max-width: 45%;
+    }
+
+    .five-day-forecast {
+        max-width: 19%;
+    }
+
+    #myMap {
+        width: 400px;
+        max-height: 400px;
+        margin-top: 20px;
+        margin-left: 10px;
+    }
+
+    form {
+        margin-top: -3px;
+    }
+
+    #main-container {
+        justify-content: center;
+        overflow: visible;
+    }
+
 }
