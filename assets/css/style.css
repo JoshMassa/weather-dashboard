@@ -15,7 +15,6 @@ body {
 
 #weather-card {
     border: 1px solid black;
-    /* margin: 0 20px 20px 250px; */
     max-height: 365px;
     width: 30vw;
     background-image: url(../images/weather-card-background.avif);
@@ -26,8 +25,9 @@ body {
     font-weight: 900;
     font-size: 24px;
     text-shadow: 2px 2px 2px black;
-    padding: 10px 0 0 10px;
+    padding: 30px 0 30px 10px;
     text-align: center;
+    margin-left: 25px;
 }
 
 a {
@@ -92,7 +92,7 @@ input {
 }
 
 #myMap {
-    width: 400px;
+    width: fit-content;
     height: 365px;
 }
 
@@ -111,13 +111,8 @@ input {
 }
 
 #weather-icon {
-    margin-top: 20px;
     background-color: rgba(220, 220, 220, 0.5);
     border-radius: 30px;
-}
-
-#temperature {
-    margin-top: 30px;
 }
 
 #five-day-container {
@@ -135,7 +130,7 @@ input {
 }
 
 #major-cities button {
-    width: 18vw;
+    width: 16vw;
     height: 40px;
     margin-top: 14px;
     border-radius: 5px;
@@ -155,20 +150,8 @@ input {
 #weather-search {
     display: flex;
     flex-direction: column;
-    /* width: 18vw; */
+    width: 16vw;
 }
-
-/* #search-history-container {
-    min-height: 600px;
-    max-height: 500px;
-    width: 350px;
-    overflow: scroll;
-    margin-left: 40px;
-} */
-
-/* #search-history-container::-webkit-scrollbar {
-    display: none;
-} */
 
 .navbar-brand:hover {
     color: white;
@@ -182,6 +165,11 @@ input {
     display: flex;
     justify-content: center;
 }
+
+.container {
+    margin-top: 30px;
+}
+
 
 @media screen and (min-width: 1560px) and (max-width: 1716px) {
     #five-day-container {
@@ -204,19 +192,4 @@ input {
     #five-day-container {
         font-size: 12px;
     }
-}
-
-
-
-
-
-
-.col-md-3 {
-    flex: 0 0 auto;
-    width: 25%;
-}
-
-.card {
-    width: 250px;
-    height: 250px;
 }
