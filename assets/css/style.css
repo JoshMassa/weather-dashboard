@@ -9,8 +9,6 @@ body {
     background-color: rgb(202, 202, 202);
     margin: 0;
     padding: 0;
-    min-width: 320px;
-    overflow: auto;
 }
 
 #weather-card {
@@ -170,6 +168,7 @@ input {
 
 .container {
     margin-top: 30px;
+    height: 1350px;
 }
 
 @media screen and (min-width: 826px) and (max-width: 991px) {
@@ -448,6 +447,7 @@ input {
 
     #five-day-container {
         margin-top: 15px;
+        margin-bottom: 50px;
     }
 
     #myMap {
@@ -459,6 +459,6 @@ input {
     }
 
     #major-cities button {
-        font-size: 12px;
+        font-size: 10px;
     }
 }
