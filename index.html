@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>5-Day Weather Dashboard</title>
 </head>
+
 <body>
     <header>
         <nav class="container-fluid bg-primary" data-bs-theme="dark">
@@ -15,9 +16,9 @@
         </nav>
     </header>
     
-        <div class="container-fluid">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-2" id="major-cities">
+            <div class="col-lg-1" id="major-cities">
                 <form id='weather-search' role="search">
                     <label for="cityInput"></label>
                     <input type="text" id="cityInput" placeholder="🔍 Search Other Cities">
@@ -25,7 +26,7 @@
                 </form>
                 <div id="search-history-container"></div>
             </div>
-            <div class="col-lg-6" id="weather-card">
+            <div class="col-lg-7" id="weather-card">
                 <h2 id="date"></h2>
                 <img id="weather-icon" src="" alt="Weather Icon">
                 <p id="temperature"></p>
@@ -36,13 +37,14 @@
                     <i id="wind-direction-icon" class="fas fa-arrow-up"></i>
                 </div>    
             </div>
+
             <div class="col-lg-4" id='myMap'></div>
-        <div class="col-lg-10" id="five-day-container">
-            <h3>5-Day Forecast</h3>
-        <div id="weather"></div>
+            <div id="five-day-container">
+                <h3>5-Day Forecast</h3>
+                <div id="weather"></div>
+            </div>
         </div>
-        </div>
-        </div>
+    </div>
 
     <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=AkCHy9OBVHzV0M7YyJzkuv_jQk7VEYpzriKp34nW3yNPxWWSDbMbpI-CNc6dh0uV&callback=loadMapScenario' async defer></script>
 

@@ -70,6 +70,7 @@ function displayForecast(dailyForecast) {
 			dailyForecast[i].weather[0].icon +
 			'.png';
 		weatherIcon.alt = 'Weather Icon';
+		weatherIcon.style.display = 'block';
 		forecastDiv.appendChild(weatherIcon);
 
 		//Create a p element to hold the temperature
@@ -104,6 +105,7 @@ getWeatherBtn.addEventListener('click', function(){
 		//Get the user's input
 		var userInput = document.getElementById('cityInput').value;
 		getWeather(userInput);
+		document.getElementById('cityInput').value = "";
 });
 
 //Function to search for weather in a specific city
@@ -302,6 +304,11 @@ function displayParsedHistory(searchHistory) {
 //Save search history to local storage
 function saveToLocalStorage(cityName) {
 	var searchHistory = JSON.parse(localStorage.getItem('history')) || [];
+		//Only save the last 5 search results		
+		if (searchHistory.length >= 5) {
+			searchHistory.shift();
+		}
+		//If the search query matches a city name, make a button for that city
 		if (searchHistory.includes(cityName)) {
 			return;
 		}
