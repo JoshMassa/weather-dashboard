@@ -16,9 +16,10 @@
         </nav>
     </header>
     
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
-            <div class="col-lg-1" id="major-cities">
+            
+            <div class="col-3">
                 <form id='weather-search' role="search">
                     <label for="cityInput"></label>
                     <input type="text" id="cityInput" placeholder="🔍 Search Other Cities">
@@ -26,23 +27,40 @@
                 </form>
                 <div id="search-history-container"></div>
             </div>
-            <div class="col-lg-7" id="weather-card">
-                <h2 id="date"></h2>
-                <img id="weather-icon" src="" alt="Weather Icon">
-                <p id="temperature"></p>
-                <p id="humidity"></p>
-                <p id="cloud-cover"></p>
-                <div class="wind-info">
-                    <p id="wind-speed"></p>
-                    <i id="wind-direction-icon" class="fas fa-arrow-up"></i>
-                </div>    
+
+            <div class="col-6">
+                <div id="weather-card">
+                    <h2 id="date"></h2>
+                    <img id="weather-icon" src="" alt="Weather Icon">
+                    <p id="temperature"></p>
+                    <p id="humidity"></p>
+                    <p id="cloud-cover"></p>
+                    <div class="wind-info">
+                        <p id="wind-speed"></p>
+                        <i id="wind-direction-icon" class="fas fa-arrow-up"></i>
+                    </div>    
+                </div>
             </div>
 
-            <div class="col-lg-4" id='myMap'></div>
-            <div id="five-day-container">
-                <h3>5-Day Forecast</h3>
-                <div id="weather"></div>
+            <div class="col-3">
+                <div id='myMap'></div>
             </div>
+
+            <!-- <div class="col-12">
+                <div id="five-day-container">
+                    <h3>5-Day Forecast</h3>
+                    <div id="weather"></div>
+                </div>
+            </div> -->
+
+            <div class="col-12 d-flex gap-3 justify-content-center flex-wrap mb-3 my-height" id="five-day-container-2">
+            <div class="card text-bg-primary my-3 p-3" id="card1"></div>
+            <div class="card text-bg-primary my-3 p-3" id="card2"></div>
+            <div class="card text-bg-primary my-3 p-3" id="card3"></div>
+            <div class="card text-bg-primary my-3 p-3" id="card4"></div>
+            <div class="card text-bg-primary my-3 p-3" id="card5"></div>
+            </div>
+            
         </div>
     </div>
 

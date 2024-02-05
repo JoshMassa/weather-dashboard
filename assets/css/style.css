@@ -15,7 +15,7 @@ body {
 
 #weather-card {
     border: 1px solid black;
-    margin: 0 20px 20px 250px;
+    /* margin: 0 20px 20px 250px; */
     max-height: 365px;
     width: 30vw;
     background-image: url(../images/weather-card-background.avif);
@@ -66,13 +66,13 @@ a {
 
 form {
     border-bottom: 1px solid black;
-    margin-top: -3px;
-    margin-left: 40px;
+    /* margin-top: -3px; */
+    /* margin-left: 40px; */
 }
 
 input {
     text-align: center;
-    width: 18vw;
+    /* width: 18vw; */
 }
 
 #get-weather {
@@ -93,7 +93,7 @@ input {
 
 #myMap {
     width: 400px;
-    max-height: 365px;
+    height: 365px;
 }
 
 .five-day-forecast {
@@ -123,7 +123,7 @@ input {
 #five-day-container {
     margin-top: -30vh;
     width: fit-content;
-    font-size: 30px;
+    font-size: 24px;
     text-align: center;
 }
 
@@ -161,20 +161,20 @@ input {
 #weather-search {
     display: flex;
     flex-direction: column;
-    width: 18vw;
+    /* width: 18vw; */
 }
 
-#search-history-container {
+/* #search-history-container {
     min-height: 600px;
     max-height: 500px;
     width: 350px;
     overflow: scroll;
     margin-left: 40px;
-}
+} */
 
-#search-history-container::-webkit-scrollbar {
+/* #search-history-container::-webkit-scrollbar {
     display: none;
-}
+} */
 
 .navbar-brand:hover {
     color: white;
@@ -210,4 +210,19 @@ input {
     #five-day-container {
         font-size: 12px;
     }
+}
+
+
+
+
+
+
+.col-md-3 {
+    flex: 0 0 auto;
+    width: 25%;
+}
+
+.card {
+    width: 250px;
+    height: 250px;
 }
