@@ -1,102 +1,74 @@
-# 06 Server-Side APIs: Weather Dashboard
+# Weather Dashboard
 
-## Your Task
+## Overview
+I created this weather dashboard so that users have a quick and efficient way to check the current weather, radar map with rain overlay, and the 5 day forecast for their location by default as well as any location across the globe that they would like to view the weather forecast for utilizing the "search other cities" input.
 
-Third-party APIs allow developers to access their data and functionality by making requests with specific parameters to a URL. Developers are often tasked with retrieving data from another application's API and using it in the context of their own. Your challenge is to build a weather dashboard that will run in the browser and feature dynamically updated HTML and CSS.
+## Features
 
-Use the [5 Day Weather Forecast](https://openweathermap.org/forecast5) to retrieve weather data for cities. The base URL should look like the following: `https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}`. After registering for a new API key, you may need to wait up to 2 hours for that API key to activate.
+1. Responsive Design
 
-**Hint**: Using the 5 Day Weather Forecast API, you'll notice that you will need to pass in coordinates instead of just a city name. Using the OpenWeatherMap APIs, how could we retrieve geographical coordinates given a city name?
+   * I designed my webpage to be fully responsive from the smallest mobile devices, to tablets, to the largest desktops to provide a consistent means to view the weather dashboard in an enjoyable and engaging experience.
 
-You will use `localStorage` to store any persistent data. For more information on how to work with the OpenWeather API, refer to the [Full-Stack Blog on how to use API keys](https://coding-boot-camp.github.io/full-stack/apis/how-to-use-api-keys).
+2. Search Bar
 
-## User Story
+    * At the top left of the page, you will find an input field that will allow you to search the weather for any city of your choice. Upon pressing enter or clicking the "Get Weather" button, the application then creates a button for your search and saves it to your local storage, making it easier to navigate back to your top searched cities. This feature will save 5 different buttons before overwriting the oldest button with your newest search criteria. When entering a new city into the input field, it will retrieve and display the data to the weather card, radar map, weather header, and 5-Day Forecast.
 
-```
-AS A traveler
-I WANT to see the weather outlook for multiple cities
-SO THAT I can plan a trip accordingly
-```
+3. Weather Card
 
-## Acceptance Criteria
+    * Near the top center of the page, you will find a weather card that displays the current forecast data for your location by default, or the location you searched.
 
-```
-GIVEN a weather dashboard with form inputs
-WHEN I search for a city
-THEN I am presented with current and future conditions for that city and that city is added to the search history
-WHEN I view current weather conditions for that city
-THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the wind speed
-WHEN I view future weather conditions for that city
-THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-WHEN I click on a city in the search history
-THEN I am again presented with current and future conditions for that city
-```
+4. Radar Map
 
-## Mock-Up
+    * At the top right of the page, you will find a radar map with a rain overlay. This shows the rain forecast for your location by default, or the location you searched.
 
-The following image shows the web application's appearance and functionality:
+5. 5-Day Forecast
 
-![The weather app includes a search option, a list of cities, and a five-day forecast and current weather conditions for Atlanta.](./assets/images/06-server-side-apis-homework-demo.png)
+    * At the bottom of the page, you will find the 5-Day Forecast. This displays weather for the next 5 days for your location by default, or the location you searched.
 
-## Grading Requirements
+6. Weather Header
 
-> **Note**: If a Challenge assignment submission is marked as “0”, it is considered incomplete and will not count towards your graduation requirements. Examples of incomplete submissions include the following:
->
-> * A repository that has no code
->
-> * A repository that includes a unique name but nothing else
->
-> * A repository that includes only a README file but nothing else
->
-> * A repository that only includes starter code
+    * At the top of the page located within the blue nav bar, you will find the weather header. This will dynamically display the city name based on your location by default, or the location you searched.
 
-This Challenge is graded based on the following criteria: 
+7. Technologies Used
 
-### Technical Acceptance Criteria: 40%
+    * HTML5
+    * CSS
+    * JavaScript
+    * Bootstrap
+    * Font Awesome
+    * BING Maps API
+    * OpenWeatherMap API
+    * VSCode
+    * GitBash
 
-* Satisfies all of the above acceptance criteria plus the following:
+## Usage
+To view this webpage, please visit https://joshmassa.github.io/weather-dashboard/
 
-    * Uses the OpenWeather API to retrieve weather data.
+To view this projects repository, please visit https://github.com/JoshMassa/weather-dashboard
 
-    * Uses `localStorage` to store persistent data.
+When viewed from a desktop, the webpage should resemble the following image:
 
-### Deployment: 32%
+![Desktop View](./assets/images/desktop-view.png)
 
-* Application deployed at live URL.
+When viewed from a tablet, the webpage should resemble the following image:
 
-* Application loads with no errors.
+![Tablet View](./assets/images/tablet-view.png)
 
-* Application GitHub URL submitted.
+When viewed from a mobile device, the webpage should resemble the following image:
 
-* GitHub repository that contains application code.
+![Mobile View](./assets/images/mobile-view.png)
 
-### Application Quality: 15%
+## Credits
 
-* Application user experience is intuitive and easy to navigate.
+This project brought to you in part by UCLA Extension and its staff including but not limited to: Our class instructor and teaching assistant of UCLA Extension Coding Bootcamp 2023-2024.
 
-* Application user interface style is clean and polished.
+Links to resource references used as follows:
 
-* Application resembles the mock-up functionality provided in the Challenge instructions.
+BING Maps Live Radar: https://www.bing.com/api/maps/sdk/mapcontrol/isdk/weatherradarmap#JS
 
-### Repository Quality: 13%
+Bootstrap: https://getbootstrap.com/docs/5.3/getting-started/introduction/
 
-* Repository has a unique name.
+OpenWeatherMap API: https://openweathermap.org
 
-* Repository follows best practices for file structure and naming conventions.
-
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages.
-
-* Repository contains quality readme file with description, screenshot, and link to deployed application.
-
-## Review
-
-You are required to submit BOTH of the following for review:
-
-* The URL of the functional, deployed application.
-
-* The URL of the GitHub repository. Give the repository a unique name and include a readme describing the project.
-
-- - -
-© 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+## License
+This project does not contain a license.
