@@ -16,7 +16,7 @@ body {
 #weather-card {
     border: 1px solid black;
     max-height: 365px;
-    width: 30vw;
+    width: 90%;
     background-image: url(../images/weather-card-background.avif);
     background-size: cover;
     background-repeat: no-repeat;
@@ -66,13 +66,11 @@ a {
 
 form {
     border-bottom: 1px solid black;
-    /* margin-top: -3px; */
-    /* margin-left: 40px; */
 }
 
 input {
     text-align: center;
-    /* width: 18vw; */
+    width: 100%;
 }
 
 #get-weather {
@@ -117,9 +115,13 @@ input {
 
 #five-day-container {
     width: fit-content;
-    font-size: 24px;
     text-align: center;
     height: 400px;
+}
+
+#five-day {
+    display: flex;
+    justify-content: center;
 }
 
 #weather {
@@ -130,14 +132,14 @@ input {
 }
 
 #major-cities button {
-    width: 16vw;
+    width: 100%;
     height: 40px;
     margin-top: 14px;
     border-radius: 5px;
 }
 
 #major-cities button:first-child {
-    margin-top: 20px;
+    margin-top: 14px;
 }
 
 .five-day-icon {
@@ -150,7 +152,7 @@ input {
 #weather-search {
     display: flex;
     flex-direction: column;
-    width: 16vw;
+    width: 95%;
 }
 
 .navbar-brand:hover {
@@ -170,26 +172,289 @@ input {
     margin-top: 30px;
 }
 
+@media screen and (min-width: 826px) and (max-width: 991px) {
+    #weather-card {
+        margin-left: 10px;
+    }
 
-@media screen and (min-width: 1560px) and (max-width: 1716px) {
-    #five-day-container {
-        font-size: 20px;
+    #get-weather {
+        width: 300px;
+    }
+
+    #search-history-container {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        width: 100%;
+        gap: 5px;
+    }
+
+    .container {
+        margin-top: 10px;
+    }
+
+    #major-cities {
+        margin-bottom: 10px;
+    }
+
+    #weather-search {
+        width: 50%;
+        margin: 0 auto;
     }
 }
 
-@media screen and (max-width: 1559px) {
+@media screen and (min-width: 768px) and (max-width: 825px) {
     #weather-card {
-        margin-left: 180px;
+        margin-left: 0;
+        padding-right: 10px;
         font-size: 16px;
-        padding-top: 30px;
-        width: 40vw;
     }
 
-    #myMap {
-        width: 22vw;
+    #get-weather {
+        width: 300px;
+    }
+
+    #search-history-container {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        width: 100%;
+        gap: 5px;
+    }
+
+    .container {
+        margin-top: 10px;
+    }
+
+    #major-cities {
+        margin-bottom: 10px;
+    }
+
+    #weather-search {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    .five-day-forecast {
+        width: 115px;
+        padding: 0;
     }
 
     #five-day-container {
-        font-size: 12px;
+        margin-top: 15px;
+    }
+
+    #myMap {
+        max-height: 314px;
+    }
+}
+
+@media screen and (min-width: 670px) and (max-width: 767px) {
+    #weather-card {
+        margin-left: 0;
+        padding-right: 10px;
+        font-size: 16px;
+    }
+
+    #get-weather {
+        width: 300px;
+    }
+
+    #search-history-container {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        width: 100%;
+        gap: 5px;
+    }
+
+    .container {
+        margin-top: 10px;
+    }
+
+    #major-cities {
+        margin-bottom: 10px;
+    }
+
+    #weather-search {
+        width: 68%;
+        margin: 0 auto;
+    }
+
+    .five-day-forecast {
+        width: 115px;
+        padding: 0;
+    }
+
+    #five-day-container {
+        margin-top: 15px;
+    }
+
+    #myMap {
+        max-height: 347px;
+    }
+}
+
+@media screen and (min-width: 595px) and (max-width: 669px) {
+    #weather {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #weather-card {
+        margin-left: 0;
+        padding-right: 10px;
+        font-size: 16px;
+    }
+
+    #get-weather {
+        width: 300px;
+    }
+
+    #search-history-container {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        width: 100%;
+        gap: 5px;
+    }
+
+    .container {
+        margin-top: 10px;
+    }
+
+    #major-cities {
+        margin-bottom: 10px;
+    }
+
+    #weather-search {
+        width: 68%;
+        margin: 0 auto;
+    }
+
+    .five-day-forecast {
+        width: 115px;
+        padding: 0;
+    }
+
+    #five-day-container {
+        margin-top: 15px;
+    }
+
+    #myMap {
+        max-height: 347px;
+    }
+}
+
+@media screen and (min-width: 576px) and (max-width: 594px) {
+    #weather {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #weather-card {
+        margin-left: 0;
+        padding-right: 10px;
+        font-size: 16px;
+    }
+
+    #get-weather {
+        width: 300px;
+    }
+
+    #search-history-container {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        width: 100%;
+        gap: 5px;
+    }
+
+    .container {
+        margin-top: 10px;
+    }
+
+    #major-cities {
+        margin-bottom: 10px;
+    }
+
+    #weather-search {
+        width: 68%;
+        margin: 0 auto;
+    }
+
+    .five-day-forecast {
+        width: 115px;
+        padding: 0;
+    }
+
+    #five-day-container {
+        margin-top: 15px;
+    }
+
+    #myMap {
+        max-height: 314px;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    #weather {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #weather-card {
+        margin: 0 auto;
+        margin-bottom: 20px;
+        padding-right: 10px;
+        font-size: 16px;
+    }
+
+    #get-weather {
+        width: 300px;
+    }
+
+    #search-history-container {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        width: 100%;
+        gap: 5px;
+    }
+
+    .container {
+        margin-top: 10px;
+    }
+
+    #major-cities {
+        margin-bottom: 10px;
+    }
+
+    #weather-search {
+        width: 68%;
+        margin: 0 auto;
+    }
+
+    .five-day-forecast {
+        width: 115px;
+        padding: 0;
+    }
+
+    #five-day-container {
+        margin-top: 15px;
+    }
+
+    #myMap {
+        max-height: 314px;
+    }
+
+    #your-local-weather {
+        font-size: 24px;
     }
 }
