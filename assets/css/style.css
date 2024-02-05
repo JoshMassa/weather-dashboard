@@ -121,10 +121,10 @@ input {
 }
 
 #five-day-container {
-    margin-top: -30vh;
     width: fit-content;
     font-size: 24px;
     text-align: center;
+    height: 400px;
 }
 
 #weather {
@@ -149,12 +149,6 @@ input {
     background-color: rgba(114, 114, 114, 0.733);
     border-radius: 30px;
     margin: 10px auto;
-}
-
-#main-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
 }
 
 #search-history-container,
