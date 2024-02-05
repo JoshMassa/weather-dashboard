@@ -457,4 +457,8 @@ input {
     #your-local-weather {
         font-size: 24px;
     }
+
+    #major-cities button {
+        font-size: 12px;
+    }
 }
